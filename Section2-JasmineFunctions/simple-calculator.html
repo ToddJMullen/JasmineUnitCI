@@ -7,16 +7,25 @@
 	<title>Simple Calculator</title>
 
 	<link rel="stylesheet" href="/lib/jasmine.css">
+	<link rel="stylesheet" href="/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
 	<script src="calculator.js"></script>
 	<script src="main.js"></script>
 
 </head>
-<body>
-	Simple Calculator
-	<input type="text" onchange="calculate(this.value)">
-	<div>Result 
-		<span id="result"></span>
+<body class="body">
+	<h1 class="title">Simple Calculator</h1>
+
+	<input class="input" type="text"
+			title="Calculator"
+			placeholder="Enter Operation"
+			value="1+2"
+			 onchange="calculate(this.value)">
+			 
+	<div class="result-container">
+		<div class="title">Result</div> 
+		<span id="result">3</span>
 	</div>
 </body>
 </html>
