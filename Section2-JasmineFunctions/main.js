@@ -8,6 +8,11 @@ function calculate(inputValue){
 	const numB = +numbers[1];
 	const operation = inputValue.match(expression);//get the part of the string that matches the expression
 
+	if( isNaN(numA) || isNaN(numB) || operation === null ){
+		updateResult("Operation or input not recognized!");
+		return;
+	}
+
 	console.log('calculate/', expression, numbers, operation );
 
 	const c = new Calculator();
