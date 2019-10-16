@@ -17,7 +17,7 @@ Calculator.prototype.multiply = function(number){
 
 Calculator.prototype.divide = function(number){
 	if( number === 0 ){
-		throw Error("Cannot devide by zero.")
+		throw Error("Cannot divide by zero.")
 	}
 	return this.total /= number;
 }
