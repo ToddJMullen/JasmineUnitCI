@@ -46,5 +46,10 @@
 - Third party matchers like jasmine-matchers.js are available to provide an extended suite of test options.
 
 
+# Organizing Specs
+To help with keeping tests organized:
+- Keep specs in the same folder as the file they are testing.
+- Keep the spec file names symmetric with the file they're testing: e.g. calculator.js + calculator.spec.js
+- Always use describe() to create a suite of tests & *describe* what the tests are testing
+- Nest suites to group tests into more focused tests
 
-## Expectations
