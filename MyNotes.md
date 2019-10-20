@@ -53,3 +53,27 @@ To help with keeping tests organized:
 - Always use describe() to create a suite of tests & *describe* what the tests are testing
 - Nest suites to group tests into more focused tests
 
+# Setup & Teardown
+- Setup is the prereqs for running the tests
+- Jasmine has: beforeEach() & beforeAll()
+- **beforeEach()** - Executed *before each* spec in which it is called. Will be called once before each of the specs in the suite (*describe()*).
+- **beforeAll()** - Executed *one time* before all the specs in a suite (*describe()*).
+- Teardown is run after the specs
+- Jasmine has:
+- **afterEach()** - Executed *after each* spec in the suite.
+- **afterAll()** - Executed *one time* after all specs in the suite.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

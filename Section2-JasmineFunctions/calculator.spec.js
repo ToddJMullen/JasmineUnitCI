@@ -1,7 +1,21 @@
-describe("calculator.js", function(){
+//jasmine.github.io/api/x.y/matchers.html will list all matchersin version x.y
 
-	//jasmine.github.io/api/x.y/matchers.html will list all matchersin version x.y
+describe("calculator.js", function(){
+	
 	describe("Calculator", function(){
+		let calc1, calc2;//Make available/shared in all test specs
+
+		beforeEach(function(){
+			//executed before each spec
+			calc1 = new Calculator();//set/reset before each test
+			calc2 = new Calculator();
+		});
+
+		afterEach(function(){
+			//executes after each spec in the describe
+		})
+
+
 
 		it('can be instantiated', function(){
 			jasmine.addMatchers( customMatchers );
@@ -21,9 +35,6 @@ describe("calculator.js", function(){
 
 
 		it('instantiates a unique object', function(){
-			const calc1 = new Calculator();
-			const calc2 = new Calculator();
-			
 			expect( calc1 ).toBeTruthy();
 			expect( calc2 ).toBeTruthy();
 			
@@ -33,31 +44,27 @@ describe("calculator.js", function(){
 
 
 		it("should initialize the total as the number 0", function(){
-			const calc = new Calculator();
-			expect( calc.total ).toBe(0);
+			expect( calc1.total ).toBe(0);
 		});
 
 
 		it("can overwrite its total", function(){
-			const calc = new Calculator();
-			calc.total = null;
-			expect( calc.total ).toBeNull();
+			calc1.total = null;
+			expect( calc1.total ).toBeNull();
 
 		});
 
 
 		it("has add, subtract, multiply, & divide operations", function(){
-			const calc = new Calculator();
-
-			// expect( cal.add ).not.toBeUndefined();
-			// expect( cal.subtract ).not.toBeUndefined();
-			// expect( cal.multiply ).not.toBeUndefined();
-			// expect( cal.divide ).not.toBeUndefined();
+			// expect( calc1.add ).not.toBeUndefined();
+			// expect( calc1.subtract ).not.toBeUndefined();
+			// expect( calc1.multiply ).not.toBeUndefined();
+			// expect( calc1.divide ).not.toBeUndefined();
 			//logically equivalient & more succinct
-			expect( calc.add ).toBeDefined();
-			expect( calc.subtract ).toBeDefined();
-			expect( calc.multiply ).toBeDefined();
-			expect( calc.divide ).toBeDefined();
+			expect( calc1.add ).toBeDefined();
+			expect( calc1.subtract ).toBeDefined();
+			expect( calc1.multiply ).toBeDefined();
+			expect( calc1.divide ).toBeDefined();
 
 		});
 
@@ -65,24 +72,22 @@ describe("calculator.js", function(){
 		describe('add()', function(){
 			
 			it("should add numbers to total", function(){
-				const calc = new Calculator();
-				calc.add(5);
+				calc1.add(5);
 				//we expect the total to be 5 now
-				expect( calc.total ).toBe(5);
+				expect( calc1.total ).toBe(5);
 			});
 		
 			it("returns the total", function(){
-				let calc = new Calculator();
-				calc.total = 10;
+				calc1.total = 10;
 	
-				expect(calc.add(10)).toBe(20);
-				expect(calc.total).toMatch(/-?\d+/);
-				expect(typeof calc.total).toMatch("number");
+				expect(calc1.add(10)).toBe(20);
+				expect(calc1.total).toMatch(/-?\d+/);
+				expect(typeof calc1.total).toMatch("number");
 	
-				expect( calc.total).toBeNumber();//not defined, but seems like it would be
+				expect( calc1.total).toBeNumber();//not defined, but seems like it would be
 				//Add jasmin-matchers to bring this & a lot of others in
 	
-				expect(calc.total).toEqual(jasmine.anything());//will match anything except null & undefined
+				expect(calc1.total).toEqual(jasmine.anything());//will match anything except null & undefined
 			});
 		
 		});
@@ -91,30 +96,27 @@ describe("calculator.js", function(){
 		describe("subtract()", function(){
 
 			it("should subtract() numbers from the total", function(){
-				const calc = new Calculator();
-				calc.total = 20;
-				calc.subtract( 10 );
-				expect( calc.total ).toBe( 10 );
+				calc1.total = 20;
+				calc1.subtract( 10 );
+				expect( calc1.total ).toBe( 10 );
 			}); 
 		});
 
 
-		
+
 		describe("multiply()", function(){
 
 			it("should multiply() the total by a number", function(){
-				const calc = new Calculator();
-				calc.total = 10;
-				calc.multiply( 2 );
-				expect( calc.total ).toBe( 20 );
+				calc1.total = 10;
+				calc1.multiply( 2 );
+				expect( calc1.total ).toBe( 20 );
 			}); 
 
 
 			it("does not handle NaN", function(){
-				const calc = new Calculator();
-				calc.total = 12;
-				calc.multiply("a");
-				expect(calc.total).toBeNaN();
+				calc1.total = 12;
+				calc1.multiply("a");
+				expect(calc1.total).toBeNaN();
 
 			});
 
@@ -125,34 +127,28 @@ describe("calculator.js", function(){
 		describe("divide()", function(){
 
 			it("should divide() the total by a number", function(){
-				const calc = new Calculator();
-				calc.total = 30;
-				calc.divide( 2 );
-				expect( calc.total ).toBe( 15 );
+				calc1.total = 30;
+				calc1.divide( 2 );
+				expect( calc1.total ).toBe( 15 );
 			}); 
+
 	
 			it("handles dividing by zero by throwing an error", function(){
-				const calc = new Calculator();
-				calc.total = 30;
+				calc1.total = 30;
 				// expect( calc.divide(0) ).toThrow()//will not work as desired, will throw the error & fail the test
 				expect( function(){//generic test
-					calc.divide(0)
+					calc1.divide(0)
 				}).toThrow();
 				expect(function(){//More specific test of thrown type
-					calc.divide(0)
+					calc1.divide(0)
 				}).toThrowError(Error)
 				expect(function(){//match error type & message
-					calc.divide(0)
+					calc1.divide(0)
 				}).toThrowError(Error, "Cannot divide by zero.");//Error message must be an exact match
 			});
 	
 		});
 
-
-
-
 	});
-
-		
 	
 });
