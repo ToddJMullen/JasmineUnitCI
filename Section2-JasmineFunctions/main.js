@@ -24,9 +24,9 @@ function calculate(inputValue){
 		case "-": result = c.subtract(numB); break;
 		case "*": result = c.multiply(numB); break;
 		case "/": result = c.divide(numB); break;
-		default:
-			throw new Error(`Unknown operation ${operation}`);
-			break;
+		// default:
+		// 	throw new Error(`Unknown operation ${operation}`);
+		// 	break;
 	}
 
 	updateResult(result);

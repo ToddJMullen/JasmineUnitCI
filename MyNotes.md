@@ -63,9 +63,30 @@ To help with keeping tests organized:
 - **afterEach()** - Executed *after each* spec in the suite.
 - **afterAll()** - Executed *one time* after all specs in the suite.
 
+## Note on Arrow Function & 'this'
+**Using arrow functions in the 'child' methods changes their context**
+**and you have to user the 'shared' parent variable implementation because**
+**'this' wont be the correct scope to reference 'element'**
 
 
+# Spying on Code 
+- Spies are needed when there are dependencies & the dependencies, or lack of them, are causing failure reports. 
+  Thus, the tests will report failure even though the code is not actually being tested. It may, or may not, be faulty.
+- Spies help us to create 'test doubles' to isolate what is being tested.
+  - Doubles are objects that stand in for the real objects.
+  - This isolates potential failures from a dependency failure so that we know any failure was in the part actually being tested.
 
+## Test Doubles are called Spies in Jasmine
+- Can stub any function and tracks calls to it & it arguments
+- Spies only exist in the describe() or it() method blocks & removed after each spec
+- To share behavior with the spies you can use the before* & after* methods
+
+## Spies have Special Matchers
+- The three most common spy methods:
+  - toHaveBeenCalled()
+  - toHaveBeenCalledWith()
+  - toHaveBeenCalledTimes()
+  - 
 
 
 
