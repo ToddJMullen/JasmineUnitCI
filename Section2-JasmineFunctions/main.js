@@ -44,11 +44,11 @@ function updateResult(result){
 }//updateResult/
 
 function showVersion(){
-	console.log(`showVersion/`);
-	const calc = new Calculator();
+	const calculator = new Calculator();
 	const el = document.getElementById("version");
 	// el.innerText = calc.version;
-	calc.version.then( version => {
+	calculator.version
+	.then( function(version){
 		el.innerText = version;
 	})
 }//showVersion/

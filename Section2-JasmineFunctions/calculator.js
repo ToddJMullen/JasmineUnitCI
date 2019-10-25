@@ -27,13 +27,20 @@ Object.defineProperty(Calculator.prototype, 'version', {
 		// return "0.1";//original version
 		//3 steps deep of Promise returns to get the data
 		return fetch("./version.json")
-		.then( rsp => {
-			return rsp.json()
+		.then( function(rsp){
+			return rsp.json();
 		})
-		.then( json => {
+		.then( function(json){
 			console.log('fetch():rsp.json().then() got:', json );
 			return json.version;
 		})
+		// .then( rsp => {
+		// 	return rsp.json();
+		// })
+		// .then( json => {
+		// 	console.log('fetch():rsp.json().then() got:', json );
+		// 	return json.version;
+		// })
 	}
 	,enumerable: true
 	,configurable: true

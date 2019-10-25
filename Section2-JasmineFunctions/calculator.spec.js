@@ -149,6 +149,23 @@ describe("calculator.js", function(){
 	
 		});
 
-	});
+		describe("get version", function(){
+			//will work sometimes due to caching, but the async nature will cause the test to run before it's returned sometimes
+			//failures aren't reflected well here since the json is local
+			// it("fetches version from an external source", function(){
+			// 	calc1.version.then( function(version){
+			// 		expect( version ).toBe("0.1");
+			// 	})
+			// })
+			it("fetches version from an external source", function(done){//for async you declare this & jasmine will provide it
+				calc1.version.then( function(version){
+					expect( version ).toBe("0.1");
+					done();//let jasmine know that the test is actually done now.
+					//if you dont call it after injecting it, the test will timeout
+				})
+			})
+		})
+
+	});//Calculator
 	
 });
