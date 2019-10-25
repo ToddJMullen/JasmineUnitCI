@@ -21,3 +21,20 @@ Calculator.prototype.divide = function(number){
 	}
 	return this.total /= number;
 }
+
+Object.defineProperty(Calculator.prototype, 'version', {
+	get: function(){ 
+		// return "0.1";//original version
+		//3 steps deep of Promise returns to get the data
+		return fetch("./version.json")
+		.then( rsp => {
+			return rsp.json()
+		})
+		.then( json => {
+			console.log('fetch():rsp.json().then() got:', json );
+			return json.version;
+		})
+	}
+	,enumerable: true
+	,configurable: true
+});

@@ -42,3 +42,13 @@ function updateResult(result){
 		elem.innerText = result;
 	}
 }//updateResult/
+
+function showVersion(){
+	console.log(`showVersion/`);
+	const calc = new Calculator();
+	const el = document.getElementById("version");
+	// el.innerText = calc.version;
+	calc.version.then( version => {
+		el.innerText = version;
+	})
+}//showVersion/
