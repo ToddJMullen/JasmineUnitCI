@@ -34,9 +34,13 @@ describe('main.js', function(){
 
 			calculate("3+7");
 			// expect( Calculator.prototype.add ).toHaveBeenCalledTimes(2);
-			expect( spy ).toHaveBeenCalledTimes(2);//alt syntaxt pf above
-			expect( spy ).toHaveBeenCalledWith(3);
-			expect( spy ).toHaveBeenCalledWith(7);//multiple calls to this matcher do not matter the order, only that it was called with the value once
+			// expect( spy ).toHaveBeenCalledTimes(2);//alt syntaxt pf above
+			// expect( spy ).toHaveBeenCalledWith(3);
+			// expect( spy ).toHaveBeenCalledWith(7);//multiple calls to this matcher do not matter the order, only that it was called with the value once
+			//alternate more verbose / explicit syntax. Still requires the spyOn() at the top (but not the spy var) 
+			expect( Calculator.prototype.add ).toHaveBeenCalledTimes(2);
+			expect( Calculator.prototype.add ).toHaveBeenCalledWith(3);
+			expect( Calculator.prototype.add ).toHaveBeenCalledWith(7);
 		});
 
 
@@ -49,6 +53,7 @@ describe('main.js', function(){
 			expect( spy ).toHaveBeenCalledWith(7);
 			expect( spy ).not.toHaveBeenCalledWith(3);//thie 1st # is not sent to the method
 		});
+
 		it("calls multiply", function(){
 			const spy = spyOn(Calculator.prototype, "multiply");
 
@@ -58,6 +63,7 @@ describe('main.js', function(){
 			expect( spy ).toHaveBeenCalledWith(8);
 			expect( spy ).not.toHaveBeenCalledWith(3);
 		});
+
 		it("calls divide", function(){
 			const spy = spyOn(Calculator.prototype, "divide");
 
@@ -67,10 +73,72 @@ describe('main.js', function(){
 			expect( spy ).toHaveBeenCalledWith(4);
 			expect( spy ).not.toHaveBeenCalledWith(8);
 		});
-		xit("validate operation");
-		xit("calls updateResult")
 		
-	});
+		it("calls updateResult (example using and.callThrough)", function(){
+			//used when testing that a function is called by your code, but you're not testing the function that is called
+			//only that is was called by your method
+			spyOn( window, "updateResult" );
+			spyOn( Calculator.prototype, "multiply" ).and.callThrough();
+
+			calculate("5*5");
+			
+			expect( window.updateResult ).toHaveBeenCalled();
+			expect( window.updateResult ).toHaveBeenCalledWith(25);
+		});
+		
+		it("calls updateResult (example using and.callFake)", function(){
+			//used when testing that a function is called by your code, but you're not testing the function that is called
+			//only that is was called by your method
+			spyOn( window, "updateResult" );
+			spyOn( Calculator.prototype, "multiply" ).and.callFake(function(number){
+				return 'fake results!';
+			});
+
+			calculate("5*5");
+			
+			expect( window.updateResult ).toHaveBeenCalled();
+			// expect( window.updateResult ).toHaveBeenCalledWith(25);//it would fail because  we've given a different fake implementation to use
+			expect( window.updateResult ).toHaveBeenCalledWith("fake results!")
+		});
+		
+		it("calls updateResult (example using and.returnValue)", function(){
+			const fakeValue = "random test returned value"
+			spyOn( window, "updateResult" );
+			spyOn( Calculator.prototype, "multiply" ).and.returnValue( fakeValue );
+
+			calculate("5*5");
+			
+			expect( window.updateResult ).toHaveBeenCalled();
+			expect( window.updateResult ).toHaveBeenCalledWith( fakeValue );
+		});
+		
+		it("calls updateResult (example using and.returnValues)", function(){
+			const fakeValue = "random test returned value"
+			spyOn( window, "updateResult" );
+			spyOn( Calculator.prototype, "add" ).and.returnValues("1st","2nd value add returns");
+
+			calculate("5+5");
+			
+			expect( window.updateResult ).toHaveBeenCalled();
+			expect( window.updateResult ).toHaveBeenCalledWith( "2nd value add returns" );
+		});
+
+		it("does not handle errors", function(){
+			spyOn( Calculator.prototype, "multiply").and.throwError("fake error");
+
+			expect( function(){ calculate("5*5") } ).toThrowError("fake error")
+		})
+
+		//Could not get this to work as expected
+		// it("throws errors for unknown operations", function(){
+		// 	const s = spyOn( window, "calculate")//.and.throwError("fake error");
+
+		// 	calculate("5,5") 
+		// 	expect( function(){calculate("8p9") } ).toThrowError("Unknown operation")
+		// })
+		
+		
+	});//calculate() suite
 
 
 
