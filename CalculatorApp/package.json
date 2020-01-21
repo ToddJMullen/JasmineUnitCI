@@ -1,0 +1,26 @@
+{
+  "name": "simple-calculator",
+  "version": "0.1.0",
+  "description": "Following along with Unit testins Javascript with Jasmine",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "karma start"
+  },
+  "author": "Todd via Juan Lizarazo / Reynaldo Pena",
+  "license": "ISC",
+  "keywords": [
+    "Jasmine",
+    "unit",
+    "testing"
+  ],
+  "devDependencies": {
+    "jasmine-core": "^3.5.0",
+    "karma": "^4.4.1",
+    "karma-jasmine": "^3.1.0",
+    "karma-jasmine-matchers": "^4.0.2"
+  },
+  "dependencies": {}
+}

@@ -1,3 +1,4 @@
 dls/
 jasmine-casts*/
 *.pdf
+node_modules/

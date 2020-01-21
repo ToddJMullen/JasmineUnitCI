@@ -91,7 +91,10 @@ To help with keeping tests organized:
   - toHaveBeenCalledTimes()
   - 
 
-
+## Automating Tests
+- We remove the lib/ folder because it's not actually part of the Calculator & manual updates or the resources is not maintainable
+- Instead we install jasmin-core, karma, karma-jasmine, karma-jasmine-matchers with NPM in order to automatic the discovery & running
+- 
 
 
 
