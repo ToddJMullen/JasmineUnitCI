@@ -3,3 +3,4 @@ jasmine-casts*/
 *.pdf
 node_modules/
 coverage/
+MyNotes.md
