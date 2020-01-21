@@ -203,25 +203,41 @@ describe('main.js', function(){
 		
 	});
 
-	xdescribe('showVersion()', function(){
+	describe('showVersion()', function(){
+		// it('calls calculator.version', function(){
+		// 	spyOn( document, "getElementById").and.returnValue({
+		// 		innerText: null
+		// 	});
+
+		// 	// spyOn( Calculator.prototype, 'version' );//it will not work
+		// 	const spy = spyOnProperty( Calculator.prototype, 'version', 'get' );//use this method to spy on property with getter
+
+		// 	showVersion();
+		// 	//does not work bc version becomes undefined when the spy is sinstalled
+		// 	// expect( Calculator.prototype.version ).toHaveBeenCalled()
+			
+		// 	//this version works, but is very verbose
+		// 	// expect(
+		// 	// 	 Object.getOwnPropertyDescriptor( Calculator.prototype, "version" ).get 
+		// 	// ).toHaveBeenCalled();
+
+		// 	//this is the recommended syntax for spying on a property & a reason to use the variable spy reference
+		// 	expect( spy ).toHaveBeenCalled();
+
+		// })
+
 		it('calls calculator.version', function(){
 			spyOn( document, "getElementById").and.returnValue({
 				innerText: null
 			});
 
 			// spyOn( Calculator.prototype, 'version' );//it will not work
-			const spy = spyOnProperty( Calculator.prototype, 'version', 'get' );//use this method to spy on property with getter
+			const spy = spyOnProperty( Calculator.prototype, 'version', 'get' ).and.returnValue( Promise.resolve(//or reject
+				new Response(`{"version":"0.1"}`)
+			));
 
 			showVersion();
-			//does not work bc version becomes undefined when the spy is sinstalled
-			// expect( Calculator.prototype.version ).toHaveBeenCalled()
-			
-			//this version works, but is very verbose
-			// expect(
-			// 	 Object.getOwnPropertyDescriptor( Calculator.prototype, "version" ).get 
-			// ).toHaveBeenCalled();
 
-			//this is the recommended syntax for spying on a property & a reason to use the variable spy reference
 			expect( spy ).toHaveBeenCalled();
 
 		})

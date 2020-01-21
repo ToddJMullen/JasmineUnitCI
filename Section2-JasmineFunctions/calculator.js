@@ -27,10 +27,10 @@ Object.defineProperty(Calculator.prototype, 'version', {
 		// return "0.1";//original version
 		//3 steps deep of Promise returns to get the data
 		return fetch("./version.json")
-		.then( function(rsp){
-			return rsp.json();
+		.then( function(rsp){//handle the response
+			return rsp.json();//this conversion is aync also
 		})
-		.then( function(json){
+		.then( function(json){//so we have to add another then to handle it
 			console.log('fetch():rsp.json().then() got:', json );
 			return json.version;
 		})

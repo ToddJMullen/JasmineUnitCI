@@ -158,9 +158,15 @@ describe("calculator.js", function(){
 			// 	})
 			// })
 			it("fetches version from an external source", function(done){//for async you declare this & jasmine will provide it
+				spyOn( window, 'fetch' ).and.returnValue( Promise.resolve(//or reject
+					new Response(`{"version":"0.1"}`)
+				));
+				// ^^ if/once mocking the async response, the done() usage below is not needed since it will actually be sync calls testing
+
 				calc1.version.then( function(version){
 					expect( version ).toBe("0.1");
 					done();//let jasmine know that the test is actually done now.
+					// ^^ recommended even if mocking responses just to be explicit that the async test is complete
 					//if you dont call it after injecting it, the test will timeout
 				})
 			})

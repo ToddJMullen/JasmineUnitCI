@@ -1,4 +1,7 @@
-#Jasmine
+# Unit Testing with Jasmine
+
+- *To run Calculator - run /Section2-JasmineFunctions/simple-calculator.html (not /index.html)*
+- *Specs/tests are run in /Section2-JasmineFunctions/spec-runner.html*
 
 ## Spec file extensions
 - Commonly named like ***.spec.js** or ***.test.js**
